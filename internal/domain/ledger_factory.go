@@ -21,7 +21,7 @@ var (
 	ErrEmptyLedgerDescription = errors.New("ledger description is required")
 )
 
-func Make(id xuid.XUID, name string, description string, opts ...LedgerOptions) (*Ledger, error) {
+func (l LedgerFactory) Make(id xuid.XUID, name string, description string, opts ...LedgerOptions) (*Ledger, error) {
 	if xuid.IsEmpty(id) {
 		return nil, ErrEmptyLedgerID
 	}
@@ -47,4 +47,22 @@ func Make(id xuid.XUID, name string, description string, opts ...LedgerOptions) 
 	}
 
 	return ledger, nil
+}
+
+func WithLedgerMetadata(md map[string]string) LedgerOptions {
+	return func(l *Ledger) {
+		l.Metadata = md
+	}
+}
+
+func WithLedgerCreatedAt(ca time.Time) LedgerOptions {
+	return func(l *Ledger) {
+		l.CreatedAt = ca
+	}
+}
+
+func WithLedgerUpdatedAt(ua time.Time) LedgerOptions {
+	return func(l *Ledger) {
+		l.UpdatedAt = ua
+	}
 }
