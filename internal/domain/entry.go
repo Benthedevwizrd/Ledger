@@ -21,7 +21,7 @@ type Entry struct {
 	Line      int32     // position within the transaction, starting at 1
 	Direction Direction // debit or credit
 
-	monetaryValue MonetaryValue
+	MonetaryValue MonetaryValue
 
 	// EffectiveAt is copied from the transaction so statements can be
 	// queried without a join.
