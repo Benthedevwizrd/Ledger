@@ -69,6 +69,18 @@ func WithAccountNormalBalance(dir Direction) AccountOption {
 	}
 }
 
+func WithAccountStatus(status AccountStatus) AccountOption {
+	return func(a *Account) {
+		a.Status = status
+	}
+}
+
+func WithAccountMetaData(md map[string]string) AccountOption {
+	return func(a *Account) {
+		a.Metadata = md
+	}
+}
+
 func WithAccountCreatedAt(ca time.Time) AccountOption {
 	return func(a *Account) {
 		a.CreatedAt = ca
