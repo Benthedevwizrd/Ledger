@@ -68,3 +68,27 @@ func (a AccountFaker) make(opts ...domain.AccountOption) *domain.Account {
 
 	return made
 }
+
+func WithAccountID(id xuid.XUID) domain.AccountOption {
+	return func(a *domain.Account) {
+		a.ID = id
+	}
+}
+
+func WithAccountLedgerID(id xuid.XUID) domain.AccountOption {
+	return func(a *domain.Account) {
+		a.LedgerID = id
+	}
+}
+
+func WithAccountCode(code string) domain.AccountOption {
+	return func(a *domain.Account) {
+		a.Code = code
+	}
+}
+
+func withAccountName(name string) domain.AccountOption {
+	return func(a *domain.Account) {
+		a.Name = name
+	}
+}
