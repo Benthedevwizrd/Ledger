@@ -69,6 +69,21 @@ func (a AccountFaker) make(opts ...domain.AccountOption) *domain.Account {
 	return made
 }
 
+func (a AccountFaker) Make(opts ...domain.AccountOption) *domain.Account {
+	return a.make(opts...)
+}
+
+func (a AccountFaker) MakeMany(count int, opts ...domain.AccountOption) []*domain.Account {
+	if count < 1 {
+		count = 1
+	}
+	accounts := make([]*domain.Account, 0, count)
+	for range count {
+		made := a.make(opts...)
+		accounts = append(accounts, made)
+	}
+	return accounts
+}
 func WithAccountID(id xuid.XUID) domain.AccountOption {
 	return func(a *domain.Account) {
 		a.ID = id
@@ -87,7 +102,7 @@ func WithAccountCode(code string) domain.AccountOption {
 	}
 }
 
-func withAccountName(name string) domain.AccountOption {
+func WithAccountName(name string) domain.AccountOption {
 	return func(a *domain.Account) {
 		a.Name = name
 	}
