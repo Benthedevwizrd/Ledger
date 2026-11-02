@@ -7,7 +7,7 @@ import (
 	"github.com/47monad/xuid"
 )
 
-type LedgerOptions func(*Ledger)
+type LedgerOption func(*Ledger)
 
 type LedgerFactory struct{}
 
@@ -21,7 +21,7 @@ var (
 	ErrEmptyLedgerDescription = errors.New("ledger description is required")
 )
 
-func (l LedgerFactory) Make(id xuid.XUID, name string, description string, opts ...LedgerOptions) (*Ledger, error) {
+func (l LedgerFactory) Make(id xuid.XUID, name string, description string, opts ...LedgerOption) (*Ledger, error) {
 	if xuid.IsEmpty(id) {
 		return nil, ErrEmptyLedgerID
 	}
@@ -49,19 +49,19 @@ func (l LedgerFactory) Make(id xuid.XUID, name string, description string, opts 
 	return ledger, nil
 }
 
-func WithLedgerMetadata(md map[string]string) LedgerOptions {
+func WithLedgerMetadata(md map[string]string) LedgerOption {
 	return func(l *Ledger) {
 		l.Metadata = md
 	}
 }
 
-func WithLedgerCreatedAt(ca time.Time) LedgerOptions {
+func WithLedgerCreatedAt(ca time.Time) LedgerOption {
 	return func(l *Ledger) {
 		l.CreatedAt = ca
 	}
 }
 
-func WithLedgerUpdatedAt(ua time.Time) LedgerOptions {
+func WithLedgerUpdatedAt(ua time.Time) LedgerOption {
 	return func(l *Ledger) {
 		l.UpdatedAt = ua
 	}

@@ -26,7 +26,7 @@ func Test_Make(t *testing.T) {
 			givenID          xuid.XUID
 			givenName        string
 			givenDescription string
-			opts             []domain.LedgerOptions
+			opts             []domain.LedgerOption
 			wanted           *domain.Ledger
 			wantedError      error
 		}{
@@ -49,7 +49,7 @@ func Test_Make(t *testing.T) {
 				givenID:          id1,
 				givenName:        name1,
 				givenDescription: description1,
-				opts:             []domain.LedgerOptions{domain.WithLedgerMetadata(metadata1)},
+				opts:             []domain.LedgerOption{domain.WithLedgerMetadata(metadata1)},
 				wanted: &domain.Ledger{
 					ID:          id1,
 					Name:        name1,
@@ -64,7 +64,7 @@ func Test_Make(t *testing.T) {
 				givenID:          id1,
 				givenName:        name1,
 				givenDescription: description1,
-				opts:             []domain.LedgerOptions{domain.WithLedgerCreatedAt(customCreatedAt)},
+				opts:             []domain.LedgerOption{domain.WithLedgerCreatedAt(customCreatedAt)},
 				wanted: &domain.Ledger{
 					ID:          id1,
 					Name:        name1,
@@ -78,7 +78,7 @@ func Test_Make(t *testing.T) {
 				givenID:          id1,
 				givenName:        name1,
 				givenDescription: description1,
-				opts:             []domain.LedgerOptions{domain.WithLedgerUpdatedAt(customUpdatedAt)},
+				opts:             []domain.LedgerOption{domain.WithLedgerUpdatedAt(customUpdatedAt)},
 				wanted: &domain.Ledger{
 					ID:          id1,
 					Name:        name1,
@@ -92,7 +92,7 @@ func Test_Make(t *testing.T) {
 				givenID:          id1,
 				givenName:        name1,
 				givenDescription: description1,
-				opts: []domain.LedgerOptions{
+				opts: []domain.LedgerOption{
 					domain.WithLedgerMetadata(metadata1),
 					domain.WithLedgerCreatedAt(customCreatedAt),
 					domain.WithLedgerUpdatedAt(customUpdatedAt),
@@ -111,7 +111,7 @@ func Test_Make(t *testing.T) {
 				givenID:          id1,
 				givenName:        name1,
 				givenDescription: description1,
-				opts: []domain.LedgerOptions{
+				opts: []domain.LedgerOption{
 					domain.WithLedgerCreatedAt(customUpdatedAt),
 					domain.WithLedgerCreatedAt(customCreatedAt),
 				},
@@ -172,7 +172,7 @@ func Test_Make(t *testing.T) {
 				givenID:          id1,
 				givenName:        "",
 				givenDescription: description1,
-				opts:             []domain.LedgerOptions{domain.WithLedgerMetadata(metadata1)},
+				opts:             []domain.LedgerOption{domain.WithLedgerMetadata(metadata1)},
 				wantedError:      domain.ErrEmptyLedgerName,
 			},
 		}
