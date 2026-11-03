@@ -32,3 +32,5 @@ type Entry struct {
 
 	CreatedAt time.Time // entries are append-only: no UpdatedAt
 }
+
+const EntryIDPrefix string = "entry_"
